@@ -1,6 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
-import  pg  from "pg"; 
+import pg from "pg";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const port = 3000;
@@ -15,11 +18,11 @@ app.use(express.static("public"));
 
 // Connexion à la base de données PostgreSQL
 const client = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "world",
-  password: "1234",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
 // Fonction pour récupérer les données du quiz depuis la base de données
